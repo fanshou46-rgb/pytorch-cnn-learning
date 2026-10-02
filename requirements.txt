@@ -1,4 +1,7 @@
-torch
-torchvision
-matplotlib
-scikit-learn
+# 2026-10-02 本地 CPU 验证环境；CUDA 安装说明见 README。
+torch==2.14.0
+torchvision==0.29.0
+matplotlib==3.11.2
+scikit-learn==1.9.1
+Pillow==12.3.0
+numpy==2.5.3

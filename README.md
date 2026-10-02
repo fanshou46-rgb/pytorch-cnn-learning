@@ -1,43 +1,62 @@
 # PyTorch CNN Learning
 
-用于系统学习 PyTorch 卷积神经网络（CNN）的练习仓库。
+用 PyTorch 完成 MNIST 手写数字分类，记录从数据读取、CNN 训练到错误分析的学习过程。
 
-## 学习路线
+已实现：50,000/10,000 训练与验证划分、CNN、Early Stopping、最佳权重保存、独立测试脚本、分类报告、混淆矩阵、错图分析、单张图片预测及卷积可视化。训练循环保留展开写法与中文注释。
 
-1. MNIST 手写数字分类
-2. CIFAR-10 彩色图像分类
-3. Data Augmentation
-4. BatchNorm / Dropout
-5. ResNet
-6. Transfer Learning
+2026-10-02 重新评估现有权重：原模型 **98.90%**，增强版 **99.13%**，测试集均为 MNIST 官方 10,000 张图片。这是两份历史权重的结果；原训练种子和过程记录不完整，尚不能据此认定提升完全来自增强。
 
-## 当前项目：MNIST CNN
+## 从哪里开始读
 
-计划覆盖：
+先读 [代码阅读指南](docs/reading_guide.md)，再看 `network.py` 和 `train.py` 的训练循环。参数解析和文件记录可以先跳过。
 
-- Dataset / DataLoader
-- CNN 网络结构
-- 训练与验证
-- Early Stopping
-- Test 测试
-- Accuracy / Precision / Recall / F1
-- Confusion Matrix
-- 单张图片预测
+- [MNIST 使用说明](mnist/README.md)：安装、运行、对照实验与结果。
+- [逐文件审查](docs/code_review.md)：原问题、修改点、写得好的部分和导师展示准备。
 
-## Repository Structure
+## 运行
+
+在仓库根目录创建并激活环境：
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+python mnist/train.py
+python mnist/test.py --no-plot
+python mnist/predict.py
+```
+
+验证环境为 Windows、Python 3.13.7、PyTorch 2.14.0 / torchvision 0.29.0、CPU。依赖按本次验证版本固定。CUDA 用户先按 [PyTorch 安装说明](https://pytorch.org/get-started/locally/) 安装相匹配的 torch/torchvision，再安装其余依赖；本次没有验证 GPU。
+
+权重和数据不提交，新克隆的仓库需要先训练。训练默认启用增强，保存到 `mnist/models/best_model_augmented.pth`。已存在的实验文件会被保护，请通过 `--output` 使用新文件名。
+
+## 目录
 
 ```text
 pytorch-cnn-learning/
-├── mnist/
-│   ├── data/
-│   ├── models/
-│   ├── load_data.py
-│   ├── network.py
-│   ├── train.py
-│   ├── test.py
-│   ├── predict.py
-│   └── README.md
-├── .gitignore
+├── README.md
 ├── requirements.txt
-└── README.md
+├── .gitignore
+├── data/                       # 自动下载的缓存，本地保留，Git 忽略
+├── mnist/
+│   ├── load_data.py             # 数据和增强
+│   ├── network.py               # CNN 定义
+│   ├── train.py                 # 训练、验证、早停
+│   ├── test.py                  # 测试与错图分析
+│   ├── predict.py               # 自己的手写图片预测
+│   ├── show_augmentation.py
+│   ├── visualize_features.py
+│   ├── visualize_kernels.py
+│   ├── images/test.png
+│   ├── models/                  # 本地权重、训练 csv/json
+│   ├── data/.gitkeep            # 早期目录占位，保留学习痕迹
+│   └── README.md
+└── docs/
+    ├── reading_guide.md
+    ├── code_review.md
+    └── results/                 # 已核验的展示材料
 ```
+
+## 后续学习路线
+
+完成增强对照与自写数字测试 → CIFAR-10 → BatchNorm / Dropout → ResNet → 迁移学习。后续项目尚未实现。

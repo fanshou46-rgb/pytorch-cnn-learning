@@ -7,6 +7,7 @@ __pycache__/
 venv/
 
 # MNIST dataset
+data/
 mnist/data/*
 !mnist/data/.gitkeep
 
@@ -15,6 +16,12 @@ mnist/models/*
 !mnist/models/.gitkeep
 *.pth
 *.pt
+*.pth.tmp
+mnist/models/*.csv
+mnist/models/*.json
+
+# Local experiment outputs (selected evidence lives in docs/)
+mnist/results/
 
 # IDE
 .vscode/

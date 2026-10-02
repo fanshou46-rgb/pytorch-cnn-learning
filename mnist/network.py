@@ -1,36 +1,32 @@
-"""CNN model definition for MNIST.
-
-This file will contain the convolutional neural network architecture.
-"""
+"""MNIST CNN：两组卷积、ReLU、池化，最后输出 10 个 logits。"""
 import torch
-import torch.nn as nn
+from torch import nn
+
+
 class CNN(nn.Module):
     def __init__(self):
-        super(CNN, self).__init__()
-
+        super().__init__()
         self.conv1 = nn.Sequential(
-            nn.Conv2d(in_channels=1, out_channels=16, kernel_size=3, stride=1, padding=1),#卷积层1
-            nn.ReLU(),#激活函数1
-            nn.MaxPool2d(kernel_size=2)#池化层1
+            nn.Conv2d(1, 16, kernel_size=3, stride=1, padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2),
         )
-
         self.conv2 = nn.Sequential(
-            nn.Conv2d(in_channels=16, out_channels=32, kernel_size=3, stride=1, padding=1),#卷积层2
-            nn.ReLU(),#激活函数2  
-            nn.MaxPool2d(kernel_size=2)#池化层2
+            nn.Conv2d(16, 32, kernel_size=3, stride=1, padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2),
         )
+        self.fc = nn.Linear(32 * 7 * 7, 10)
 
-        self.fc = nn.Linear(32 * 7 * 7 , 10)#全连接层
-    def forward(self,x):
-        x=self.conv1(x)
-        x= self.conv2(x)
-        x=x.view(x.size(0), -1)#展平
-        x=self.fc(x)
-        return x
+    def forward(self, x):
+        x = self.conv1(x)  # [N, 1, 28, 28] → [N, 16, 14, 14]
+        x = self.conv2(x)  # → [N, 32, 7, 7]
+        x = torch.flatten(x, start_dim=1)
+        return self.fc(x)  # CrossEntropyLoss 直接接收 logits。
+
+
 if __name__ == "__main__":
     model = CNN()
-    x=torch.randn(64, 1, 28, 28)#正分布随机数
-    output = model(x)
-    print("输入 shape = ", x.shape)
-    print("输出 shape = ", output.shape)
-    
+    x = torch.randn(64, 1, 28, 28)
+    print("输入 shape =", x.shape)
+    print("输出 shape =", model(x).shape)
