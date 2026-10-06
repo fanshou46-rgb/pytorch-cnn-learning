@@ -23,6 +23,12 @@ mnist/models/*.json
 # Local experiment outputs (selected evidence lives in docs/)
 mnist/results/
 
+# CIFAR-10 learning outputs
+cifar10/models/*
+!cifar10/models/.gitkeep
+cifar10/results/*
+!cifar10/results/.gitkeep
+
 # IDE
 .vscode/
 

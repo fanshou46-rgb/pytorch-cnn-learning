@@ -1,0 +1,36 @@
+{
+  "angle": 10,
+  "filter": "Both models correct on original image",
+  "selection": "Highest confidence of wrong model within each group",
+  "group_counts": {
+    "baseline_only_wrong": 102,
+    "both_wrong": 40,
+    "augmented_only_wrong": 59
+  },
+  "displayed": {
+    "baseline_only_wrong": {
+      "index": 720,
+      "true": 5,
+      "baseline_pred": 8,
+      "baseline_confidence": 0.9983466863632202,
+      "augmented_pred": 5,
+      "augmented_confidence": 0.5977587699890137
+    },
+    "both_wrong": {
+      "index": 9749,
+      "true": 5,
+      "baseline_pred": 6,
+      "baseline_confidence": 0.740502119064331,
+      "augmented_pred": 6,
+      "augmented_confidence": 0.9847495555877686
+    },
+    "augmented_only_wrong": {
+      "index": 3702,
+      "true": 5,
+      "baseline_pred": 5,
+      "baseline_confidence": 0.4722684621810913,
+      "augmented_pred": 4,
+      "augmented_confidence": 0.9705257415771484
+    }
+  }
+}

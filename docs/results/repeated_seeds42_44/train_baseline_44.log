@@ -1,0 +1,19 @@
+当前设备:  cpu
+Epoch [1/20], Train Loss: 0.2726, Train Accuracy: 0.9193, Val Loss: 0.0954, Val Accuracy: 0.9715
+保存最佳模型权重。
+Epoch [2/20], Train Loss: 0.0787, Train Accuracy: 0.9758, Val Loss: 0.0706, Val Accuracy: 0.9778
+保存最佳模型权重。
+Epoch [3/20], Train Loss: 0.0582, Train Accuracy: 0.9820, Val Loss: 0.0572, Val Accuracy: 0.9816
+保存最佳模型权重。
+Epoch [4/20], Train Loss: 0.0466, Train Accuracy: 0.9855, Val Loss: 0.0514, Val Accuracy: 0.9845
+保存最佳模型权重。
+Epoch [5/20], Train Loss: 0.0398, Train Accuracy: 0.9878, Val Loss: 0.0438, Val Accuracy: 0.9870
+保存最佳模型权重。
+Epoch [6/20], Train Loss: 0.0343, Train Accuracy: 0.9886, Val Loss: 0.0455, Val Accuracy: 0.9857
+验证损失没有改善，等待次数: 1/3
+Epoch [7/20], Train Loss: 0.0299, Train Accuracy: 0.9905, Val Loss: 0.0470, Val Accuracy: 0.9864
+验证损失没有改善，等待次数: 2/3
+Epoch [8/20], Train Loss: 0.0253, Train Accuracy: 0.9923, Val Loss: 0.0451, Val Accuracy: 0.9868
+验证损失没有改善，等待次数: 3/3
+早停触发，停止训练。
+最佳模型权重已保存到 mnist\models\baseline_seed44.pth

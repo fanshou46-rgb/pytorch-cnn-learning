@@ -1,0 +1,4 @@
+angle,samples,baseline_correct,baseline_accuracy,baseline_errors,augmented_correct,augmented_accuracy,augmented_errors,corrected,regressed,both_wrong
+-10,10000,9709,0.9709,291,9835,0.9835,165,193,67,98
+0,10000,9862,0.9862,138,9919,0.9919,81,97,40,41
+10,10000,9773,0.9773,227,9829,0.9829,171,129,73,98

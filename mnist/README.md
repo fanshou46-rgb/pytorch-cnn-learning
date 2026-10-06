@@ -43,6 +43,55 @@ python mnist/test.py --model mnist/models/augmented_seed42.pth --no-plot --save-
 
 save-dir 中的 metrics.json 包含权重 SHA-256，predictions.csv 包含每张图片的原始测试集索引、标签、预测、置信度；混淆矩阵行是真实类别、列是预测类别。Softmax 值不保证等于实际答对的概率。
 
+## 固定旋转鲁棒性测试
+
+使用已有的两份 seed=42 权重，在仓库根目录运行：
+
+```powershell
+python mnist/test_rotation.py
+```
+
+每个角度都使用官方测试集的全部 10,000 张图片，同一批旋转后的图片分别交给两个模型。先在 PIL 原图上固定旋转，再 ToTensor；使用最近邻插值、黑色填充，画布保持 28×28。模型处于 eval/no_grad，不更新参数。此测试单独报告输入扰动结果，常规 test.py 保持原来的干净测试协议。
+
+2026-10-06 CPU 实测：
+
+| 固定角度 | 基线准确率 | 增强准确率 | 基线错误数 | 增强错误数 |
+| --- | ---: | ---: | ---: | ---: |
+| −10° | 97.78% | 98.20% | 222 | 180 |
+| 0° | 98.86% | 99.22% | 114 | 78 |
+| +10° | 97.67% | 98.25% | 233 | 175 |
+
+0° 与此前两份权重的干净测试结果一致。相对各自的 0°，基线在 −10°/+10° 下分别下降 1.08/1.19 个百分点，增强模型下降 1.02/0.97 个百分点。本次两个方向的增强模型准确率都更高，且降幅更小；−10° 的降幅差异较小。增强训练同时使用了旋转和平移，结果反映整个增强方案；目前只有一组种子和两个旋转角度。
+
+[逐角度指标](../docs/results/rotation_seed42/metrics.csv) · [测试设置与权重 SHA-256](../docs/results/rotation_seed42/config.json)
+
+结果目录已存在时会拒绝覆盖，可通过 --save-dir 指定新目录。
+
+## 三组配对种子复验
+
+2026-10-06 补做 seed=43、44，与已有 seed=42 一起报告。沿用现有 train.py 的网络结构、训练参数和早停规则，不额外调整参数。同一个 seed 控制两组的初始化、数据划分和 shuffle；跨 seed 会同时改变这些随机设置。
+
+| seed | 基线原图准确率 | 增强原图准确率 | 提升（百分点） |
+| --- | ---: | ---: | ---: |
+| 42 | 98.86% | 99.22% | +0.36 |
+| 43 | 98.62% | 99.19% | +0.57 |
+| 44 | 98.62% | 98.96% | +0.34 |
+
+原图平均准确率：基线 98.70% ± 0.14，增强 99.12% ± 0.14；平均配对提升 0.42 ± 0.13 个百分点。± 表示三组结果的样本标准差（n=3，分母 n−1），不是置信区间。
+
+−10°/+10° 的平均准确率提升分别为 0.91/0.46 个百分点。三组在这两个角度下的增强准确率均更高，但旋转后相对原图的降幅并非每组都更小。测试集用于统一汇报，最佳权重由验证损失选择。
+
+[完整复验报告、逐组旋转结果与标准差](../docs/results/repeated_seeds42_44/README.md)
+
+补做实验的训练命令（已有同名文件时会拒绝覆盖）：
+
+```powershell
+python mnist/train.py --no-augmentation --seed 43 --output mnist/models/baseline_seed43.pth
+python mnist/train.py --seed 43 --output mnist/models/augmented_seed43.pth
+python mnist/train.py --no-augmentation --seed 44 --output mnist/models/baseline_seed44.pth
+python mnist/train.py --seed 44 --output mnist/models/augmented_seed44.pth
+```
+
 ## 已核验的历史结果
 
 2026-10-02 用整理后的脚本重新评估，旧权重文件未修改：
@@ -91,6 +140,7 @@ python mnist/visualize_kernels.py --model mnist/models/best_model_augmented.pth
 | network.py | CNN 结构与前向传播 |
 | train.py | 数据划分、训练、验证、早停、权重和日志 |
 | test.py | 测试、分类指标、混淆矩阵、错图与结果保存 |
+| test_rotation.py | 同一批图片固定旋转后，比较两份模型的准确率 |
 | predict.py | 单张图片预处理与推理 |
 | show_augmentation.py | 同一原图的随机增强展示 |
 | visualize_features.py | 逐步计算并显示两层 ReLU 后的特征图 |
