@@ -33,4 +33,3 @@ Test Accuracy: 98.96%
     accuracy                         0.9896     10000
    macro avg     0.9895    0.9895    0.9895     10000
 weighted avg     0.9896    0.9896    0.9896     10000
-

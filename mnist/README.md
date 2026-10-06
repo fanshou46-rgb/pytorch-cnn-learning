@@ -48,7 +48,7 @@ save-dir 中的 metrics.json 包含权重 SHA-256，predictions.csv 包含每张
 使用已有的两份 seed=42 权重，在仓库根目录运行：
 
 ```powershell
-python mnist/test_rotation.py
+python mnist/test_rotation.py --save-dir mnist/results/rotation_seed42
 ```
 
 每个角度都使用官方测试集的全部 10,000 张图片，同一批旋转后的图片分别交给两个模型。先在 PIL 原图上固定旋转，再 ToTensor；使用最近邻插值、黑色填充，画布保持 28×28。模型处于 eval/no_grad，不更新参数。此测试单独报告输入扰动结果，常规 test.py 保持原来的干净测试协议。
@@ -61,11 +61,11 @@ python mnist/test_rotation.py
 | 0° | 98.86% | 99.22% | 114 | 78 |
 | +10° | 97.67% | 98.25% | 233 | 175 |
 
-0° 与此前两份权重的干净测试结果一致。相对各自的 0°，基线在 −10°/+10° 下分别下降 1.08/1.19 个百分点，增强模型下降 1.02/0.97 个百分点。本次两个方向的增强模型准确率都更高，且降幅更小；−10° 的降幅差异较小。增强训练同时使用了旋转和平移，结果反映整个增强方案；目前只有一组种子和两个旋转角度。
+0° 与此前两份权重的干净测试结果一致。相对各自的 0°，基线在 −10°/+10° 下分别下降 1.08/1.19 个百分点，增强模型下降 1.02/0.97 个百分点。上表是 seed=42 这一组：两个方向的增强模型准确率都更高，且降幅更小；−10° 的降幅差异较小。增强训练同时使用了旋转和平移，结果反映整个增强方案。三组种子的汇总见下一节。
 
 [逐角度指标](../docs/results/rotation_seed42/metrics.csv) · [测试设置与权重 SHA-256](../docs/results/rotation_seed42/config.json)
 
-结果目录已存在时会拒绝覆盖，可通过 --save-dir 指定新目录。
+结果目录已存在时会拒绝覆盖，可通过 --save-dir 指定新目录。默认目录 docs/results/rotation_seed42 已包含提交的实验记录，运行新实验时请使用上述 mnist/results/ 输出路径。
 
 ## 三组配对种子复验
 
@@ -103,7 +103,7 @@ python mnist/train.py --seed 44 --output mnist/models/augmented_seed44.pth
 
 [原模型指标](../docs/results/legacy_baseline/metrics.json) · [增强版指标](../docs/results/augmented/metrics.json)
 
-两份历史权重的训练配置记录不完整，这是初步比较。此前记录中的 best_model01.pth 为 98.76%，这次没有重新测试该文件。上述两份模型的差值为 0.23 个百分点；后续应固定实验协议并重复多组配对种子，再报告均值和标准差。测试集用于结果汇报，模型选择依赖验证集。
+两份历史权重的训练配置记录不完整，这是初步比较。此前记录中的 best_model01.pth 为 98.76%，这次没有重新测试该文件。上述两份历史模型的差值为 0.23 个百分点；新的受控实验使用独立的 seed=42、43、44 权重，结果见前面的三组配对种子复验。测试集用于结果汇报，模型选择依赖验证集。
 
 ![增强版混淆矩阵](../docs/results/augmented/confusion_matrix.png)
 

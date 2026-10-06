@@ -1,6 +1,6 @@
 # 仓库整理与逐文件审查
 
-审查日期：2026-10-02。仓库：fanshou46-rgb/pytorch-cnn-learning。本地：D:/AI/pytorch-cnn-learning。
+审查日期：2026-10-02。仓库：fanshou46-rgb/pytorch-cnn-learning。本地：D:/AI/pytorch-cnn-learning。本文保留当时的审查记录；2026-10-06 已完成三组配对种子与固定旋转实验，当前结果见 [复验报告](results/repeated_seeds42_44/README.md)，当前项目状态见 [根 README](../README.md)。
 
 ## 当前结论
 
@@ -66,4 +66,4 @@
 
 本次修改前的 mnist 目录备份在 D:/AI/pytorch-cnn-learning-review-backup-20261002/mnist；原工作区差异备份在 D:/AI/pytorch-cnn-learning-before-review.patch。历史权重未修改，根目录原始数据仍在。
 
-先前未提交的增强/预测/错图学习成果一并保留。整理内容保存在本地分支 review/mnist-cleanup，并形成一次独立提交；没有推送到 GitHub。
+2026-10-02 的整理保存在分支 review/mnist-cleanup，并形成独立提交。2026-10-06 补充配对实验、旋转测试与 CIFAR-10 空框架后，已推送同一分支并创建 [PR #1](https://github.com/fanshou46-rgb/pytorch-cnn-learning/pull/1)。先前的增强、预测和错图学习成果一并保留。
