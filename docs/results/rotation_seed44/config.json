@@ -1,0 +1,23 @@
+{
+  "angles": [
+    -10,
+    0,
+    10
+  ],
+  "dataset": "MNIST official test set",
+  "interpolation": "NEAREST",
+  "fill": 0,
+  "expand": false,
+  "device": "cpu",
+  "torch_version": "2.14.0+cpu",
+  "models": {
+    "baseline": {
+      "path": "D:\\AI\\pytorch-cnn-learning\\mnist\\models\\baseline_seed44.pth",
+      "sha256": "040db30c3d6d58de557b70a715739351d6e190f6abeb82b985a4b1998204516a"
+    },
+    "augmented": {
+      "path": "D:\\AI\\pytorch-cnn-learning\\mnist\\models\\augmented_seed44.pth",
+      "sha256": "36027313dab97044ec92eefae120a7983d2d91d66799fbf0294c7f46dab27d4a"
+    }
+  }
+}

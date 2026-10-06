@@ -1,31 +1,37 @@
-"""MNIST dataset and DataLoader setup.
+"""MNIST 数据读取：只在调用 get_dataset() 时加载数据。"""
+from pathlib import Path
 
-This file will be implemented step by step during the CNN learning project.
-"""
-import torch
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 
-transform = transforms.Compose([transforms.ToTensor()])#图像预处理，将图像转换为张量
+# 沿用根目录已有 data/ 缓存，避免随运行目录改变下载位置。
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
-train_dataset = datasets.MNIST(root='./data', train=True, download=True, transform=transform)#下载训练集数据
+train_transform = transforms.Compose([
+    transforms.RandomRotation(10),  # 轻微旋转，不改变数字类别
+    transforms.RandomAffine(degrees=0, translate=(0.1, 0.1)),  # 轻微平移
+    transforms.ToTensor(),
+])
+test_transform = transforms.ToTensor()
 
-test_dataset = datasets.MNIST(root='./data', train=False, download=True, transform=transform)#下载测试集数据
 
-train_loader = DataLoader(dataset=train_dataset, batch_size=64, shuffle=True,num_workers=0)#训练集数据加载器
+def get_dataset(train=True, augment=False):
+    """训练图片可增强；验证和测试图片只转为 Tensor。"""
+    if augment and not train:
+        raise ValueError("测试集不能使用随机增强。")
+    return datasets.MNIST(
+        root=str(DATA_DIR), train=train, download=True,
+        transform=train_transform if augment else test_transform,
+    )
 
-test_loader = DataLoader(dataset=test_dataset, batch_size=64, shuffle=False,num_workers=0)#测试集数据加载器
 
-if __name__ == "__main__":#
-    print("训练集数量：",len(train_dataset))
-    print("测试集数量：",len(test_dataset))
-
-    image, label = next(iter(train_loader))
-
-    print("image shape = ", image.shape)
-    print("label shape = ", label.shape)
-
-    print("第一张图片的标签 = ", label[0].item())
-    print("第一张图片的shape = ", image[0].shape)
-
-    
+if __name__ == "__main__":
+    # 单独运行这个文件时，才下载数据并检查形状。
+    train_dataset = get_dataset(train=True, augment=True)
+    test_dataset = get_dataset(train=False)
+    train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
+    print("官方训练集数量：", len(train_dataset))
+    print("官方测试集数量：", len(test_dataset))
+    images, labels = next(iter(train_loader))
+    print("images shape =", images.shape)
+    print("labels shape =", labels.shape)

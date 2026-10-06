@@ -1,0 +1,177 @@
+{
+  "counts": {
+    "regressed": 34,
+    "both_wrong": 44,
+    "corrected": 70,
+    "both_correct": 9852
+  },
+  "selection": "Highest augmented-model confidence within each group; first 9",
+  "displayed": {
+    "regressed": [
+      {
+        "index": 6576,
+        "true": 7,
+        "baseline_pred": 7,
+        "baseline_confidence": 0.7532129287719727,
+        "augmented_pred": 1,
+        "augmented_confidence": 0.9530395269393921,
+        "group": "regressed"
+      },
+      {
+        "index": 4761,
+        "true": 9,
+        "baseline_pred": 9,
+        "baseline_confidence": 0.5864899754524231,
+        "augmented_pred": 8,
+        "augmented_confidence": 0.9506182074546814,
+        "group": "regressed"
+      },
+      {
+        "index": 2182,
+        "true": 1,
+        "baseline_pred": 1,
+        "baseline_confidence": 0.8490108251571655,
+        "augmented_pred": 3,
+        "augmented_confidence": 0.9463730454444885,
+        "group": "regressed"
+      },
+      {
+        "index": 2462,
+        "true": 2,
+        "baseline_pred": 2,
+        "baseline_confidence": 0.9419297575950623,
+        "augmented_pred": 0,
+        "augmented_confidence": 0.9093994498252869,
+        "group": "regressed"
+      },
+      {
+        "index": 938,
+        "true": 3,
+        "baseline_pred": 3,
+        "baseline_confidence": 0.9530306458473206,
+        "augmented_pred": 5,
+        "augmented_confidence": 0.8901191353797913,
+        "group": "regressed"
+      },
+      {
+        "index": 5268,
+        "true": 9,
+        "baseline_pred": 9,
+        "baseline_confidence": 0.5074039697647095,
+        "augmented_pred": 8,
+        "augmented_confidence": 0.8430879712104797,
+        "group": "regressed"
+      },
+      {
+        "index": 9904,
+        "true": 2,
+        "baseline_pred": 2,
+        "baseline_confidence": 0.6957420706748962,
+        "augmented_pred": 8,
+        "augmented_confidence": 0.8430233001708984,
+        "group": "regressed"
+      },
+      {
+        "index": 445,
+        "true": 6,
+        "baseline_pred": 6,
+        "baseline_confidence": 0.9906225800514221,
+        "augmented_pred": 0,
+        "augmented_confidence": 0.8215160369873047,
+        "group": "regressed"
+      },
+      {
+        "index": 3474,
+        "true": 2,
+        "baseline_pred": 2,
+        "baseline_confidence": 0.9702381491661072,
+        "augmented_pred": 7,
+        "augmented_confidence": 0.8109526634216309,
+        "group": "regressed"
+      }
+    ],
+    "both_wrong": [
+      {
+        "index": 4176,
+        "true": 2,
+        "baseline_pred": 7,
+        "baseline_confidence": 0.9430763125419617,
+        "augmented_pred": 7,
+        "augmented_confidence": 0.9985426664352417,
+        "group": "both_wrong"
+      },
+      {
+        "index": 9729,
+        "true": 5,
+        "baseline_pred": 6,
+        "baseline_confidence": 0.958061695098877,
+        "augmented_pred": 6,
+        "augmented_confidence": 0.9935615062713623,
+        "group": "both_wrong"
+      },
+      {
+        "index": 9698,
+        "true": 6,
+        "baseline_pred": 5,
+        "baseline_confidence": 0.6643553972244263,
+        "augmented_pred": 1,
+        "augmented_confidence": 0.9761576652526855,
+        "group": "both_wrong"
+      },
+      {
+        "index": 1232,
+        "true": 9,
+        "baseline_pred": 4,
+        "baseline_confidence": 0.946782648563385,
+        "augmented_pred": 4,
+        "augmented_confidence": 0.9732537269592285,
+        "group": "both_wrong"
+      },
+      {
+        "index": 3073,
+        "true": 1,
+        "baseline_pred": 2,
+        "baseline_confidence": 0.9993394017219543,
+        "augmented_pred": 2,
+        "augmented_confidence": 0.9712494015693665,
+        "group": "both_wrong"
+      },
+      {
+        "index": 9692,
+        "true": 9,
+        "baseline_pred": 7,
+        "baseline_confidence": 0.9530854225158691,
+        "augmented_pred": 7,
+        "augmented_confidence": 0.9496883749961853,
+        "group": "both_wrong"
+      },
+      {
+        "index": 2293,
+        "true": 9,
+        "baseline_pred": 2,
+        "baseline_confidence": 0.7556762099266052,
+        "augmented_pred": 4,
+        "augmented_confidence": 0.933414876461029,
+        "group": "both_wrong"
+      },
+      {
+        "index": 813,
+        "true": 9,
+        "baseline_pred": 8,
+        "baseline_confidence": 0.689957320690155,
+        "augmented_pred": 8,
+        "augmented_confidence": 0.9252445697784424,
+        "group": "both_wrong"
+      },
+      {
+        "index": 1247,
+        "true": 9,
+        "baseline_pred": 5,
+        "baseline_confidence": 0.8914532661437988,
+        "augmented_pred": 5,
+        "augmented_confidence": 0.919160783290863,
+        "group": "both_wrong"
+      }
+    ]
+  }
+}
